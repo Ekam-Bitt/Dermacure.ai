@@ -47,7 +47,7 @@ function OtpLogin() {
       auth,
       'recaptcha-container',
       {
-        size: 'normal' // Changed for debugging
+        size: 'invisible'
       }
     );
 
@@ -100,6 +100,9 @@ function OtpLogin() {
     }
 
     try {
+      // Explicitly execute reCAPTCHA
+      await recaptchaVerifier.verify();
+
       const confirmationResult = await signInWithPhoneNumber(
         auth,
         phoneNumber,
