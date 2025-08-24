@@ -209,11 +209,7 @@ const Model = () => {
       const pdfBytes = await pdfDoc.save();
 
       // Convert PDF buffer (Uint8Array) to a Blob by using its underlying ArrayBuffer
-      const uint8 =
-        pdfBytes instanceof Uint8Array
-          ? pdfBytes
-          : new Uint8Array(pdfBytes as unknown as ArrayBuffer);
-      const blob = new Blob([uint8.buffer], { type: 'application/pdf' });
+      const blob = new Blob([pdfBytes], { type: 'application/pdf' });
       
       // Set the PDF Blob and PDF generation state
       setPdfBlob(blob);
