@@ -4,15 +4,15 @@ import { ImCross } from 'react-icons/im';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-import { useUser } from '../../../context/usercontext';
+import { useUser } from '@/context/usercontext';
 import {
   Avatar,
   Menu,
   MenuButton,
   MenuItem,
   MenuList
-} from '../../../lib/chakraui';
-import { useAuth } from '../../../context/authContext';
+} from '@/lib/chakraui';
+import { useAuth } from '@/context/authContext';
 
 const Navbar = () => {
   const [open, setOpen] = useState<boolean>(false);

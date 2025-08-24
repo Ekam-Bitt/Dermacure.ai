@@ -8,7 +8,7 @@ import {
   FormLabel,
   Input,
   Textarea // Import Textarea for Query Text/Feedback
-} from '../../../../lib/chakraui';
+} from '@/lib/chakraui';
 import { Field, FieldProps, Form, Formik } from 'formik';
 
 export default function ContactForm() {

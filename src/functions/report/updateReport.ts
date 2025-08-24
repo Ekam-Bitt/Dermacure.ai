@@ -1,7 +1,7 @@
 import { doc, updateDoc } from 'firebase/firestore';
-import IUser from '../../../Interfaces/userInterface';
-import { db } from '../../../lib/firebaseConfig';
-import IReport from '../../../Interfaces/reportInterface';
+import IUser from '@/types/userInterface';
+import { db } from '@/lib/firebase';
+import IReport from '@/types/reportInterface';
 
 export default async function updateUserData(
   reportId: string | undefined,

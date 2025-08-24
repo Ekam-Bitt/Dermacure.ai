@@ -1,6 +1,6 @@
 "use client";
 
-import { auth } from "../../../lib/firebaseConfig";
+import { auth } from '@/lib/firebase';
 import {
   ConfirmationResult,
   RecaptchaVerifier,

@@ -13,7 +13,7 @@ import { CircularProgress } from '@chakra-ui/react';
 import { useAuth } from './authContext';
 import IUser from '../Interfaces/userInterface';
 import { doc, onSnapshot } from 'firebase/firestore';
-import { db } from '../lib/firebaseConfig';
+import { db } from '@/lib/firebase';
 
 interface IDefaultValues {
   user: null | IUser;

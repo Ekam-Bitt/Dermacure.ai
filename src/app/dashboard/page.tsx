@@ -19,7 +19,7 @@ import {
 } from 'react-icons/ai';
 import { BsRobot } from 'react-icons/bs';
 import { FaUser } from 'react-icons/fa';
-import { useUser } from '../../../context/usercontext';
+import { useUser } from '@/context/usercontext';
 
 import dynamic from 'next/dynamic'; // Import dynamic
 

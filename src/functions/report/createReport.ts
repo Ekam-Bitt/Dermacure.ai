@@ -1,5 +1,5 @@
-import IReport from '../../../Interfaces/reportInterface';
-import { db } from '../../../lib/firebaseConfig';
+import IReport from '@/types/reportInterface';
+import { db } from '@/lib/firebase';
 import { addDoc, collection, doc, getDoc, setDoc } from 'firebase/firestore';
 
 const createIssue = async (report: IReport) => {

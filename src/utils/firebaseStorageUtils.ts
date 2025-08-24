@@ -5,6 +5,6 @@ import {
   uploadBytesResumable,
   uploadString
 } from 'firebase/storage';
-import { storage } from '../../lib/firebaseConfig'; // Assuming this path is correct
+import { storage } from '@/lib/firebase';
 
 export { getDownloadURL, ref, uploadBytesResumable, uploadString, storage };

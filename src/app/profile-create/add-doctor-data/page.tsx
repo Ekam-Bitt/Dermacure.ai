@@ -1,12 +1,12 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Input, Select } from '../../../../lib/chakraui';
+import { Input, Select } from '@/lib/chakraui';
 import { useRouter } from 'next/navigation';
 import Navbar from '@/components/Header/Navbar.main';
 import IUser from '../../../../Interfaces/userInterface';
 import medicalSpecialties from '../../../../data/medialSpeciality';
-import { useAuth } from '../../../../context/authContext';
+import { useAuth } from '@/context/authContext';
 import updateUserData from '@/functions/user/updateUserData';
 import useFirebaseStorageUpload from '../../../../src/hooks/useFirebaseStorageUpload'; // Regular import
 

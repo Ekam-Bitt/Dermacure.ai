@@ -1,5 +1,5 @@
 import { doc, updateDoc } from 'firebase/firestore';
-import { db } from '../../../lib/firebaseConfig';
+import { db } from '@/lib/firebase';
 
 export default async function requestedDocToView(
   reportId: string,

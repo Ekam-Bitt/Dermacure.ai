@@ -6,7 +6,7 @@ import {
   Tab,
   TabPanel,
   TabIndicator
-} from '../../../../lib/chakraui';
+} from '@/lib/chakraui';
 
 export default function CustomTabs() {
   return (

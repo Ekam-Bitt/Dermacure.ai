@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
 import PatientDashboard from './Patient.dashboard.main'; // Assuming correct path
 import DoctorDashboard from './Doctor.dashboard.main'; // Assuming correct path
-import { useUser } from '../../../context/usercontext'; // Assuming correct path
+import { useUser } from '@/context/usercontext';
 
 const DashboardContent = () => {
   const searchParams = useSearchParams();

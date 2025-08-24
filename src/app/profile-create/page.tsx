@@ -1,11 +1,11 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Input, Select } from '../../../lib/chakraui';
+import { Input, Select } from '@/lib/chakraui';
 import { useRouter } from 'next/navigation';
 import Navbar from '@/components/Header/Navbar.main';
 import IUser from '../../../Interfaces/userInterface';
-import { useAuth } from '../../../context/authContext';
+import { useAuth } from '@/context/authContext';
 import createUser from '@/functions/user/createUser';
 
 const CreateProfile = () => {

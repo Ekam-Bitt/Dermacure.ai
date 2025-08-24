@@ -1,6 +1,6 @@
 import { collection, getDocs, query, where } from 'firebase/firestore';
-import IReport from '../../../Interfaces/reportInterface';
-import { db } from '../../../lib/firebaseConfig';
+import IReport from '@/types/reportInterface';
+import { db } from '@/lib/firebase';
 
 export default async function getAllReports() {
   let reportDataAll: Partial<IReport>[] = [];

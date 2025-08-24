@@ -1,4 +1,4 @@
-import { db } from '../../../lib/firebaseConfig';
+import { db } from '@/lib/firebase';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 const createUser = async (user: any) => {

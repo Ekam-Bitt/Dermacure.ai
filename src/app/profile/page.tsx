@@ -1,7 +1,7 @@
 'use client';
 import Navbar from '@/components/Header/Navbar.main';
-import { useUser } from '../../../context/usercontext';
-import { Avatar, Input, Select } from '../../../lib/chakraui';
+import { useUser } from '@/context/usercontext';
+import { Avatar, Input, Select } from '@/lib/chakraui';
 import React from 'react';
 
 const AccountDetails = () => {

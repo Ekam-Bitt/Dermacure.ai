@@ -8,19 +8,19 @@ import '@tensorflow/tfjs';
 import { Class, Summary } from '../../database/diesease';
 import { PDFDocument, rgb } from 'pdf-lib';
 
-import { useUser } from '../../../context/usercontext';
+import { useUser } from '@/context/usercontext';
 import {
   load as cocoModelLoad,
   ObjectDetection
 } from '@tensorflow-models/coco-ssd';
 import { ClassNames } from '@emotion/react';
-import { useReport } from '../../../context/reportContext';
+import { useReport } from '@/context/reportContext';
 import { json } from 'stream/consumers';
 import IReport from '../../../Interfaces/reportInterface';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
-import { storage } from '../../../lib/firebaseConfig';
+import { storage } from '@/lib/firebase';
 import createIssue from '@/functions/report/createReport';
-import { useToast } from '../../../lib/chakraui';
+import { useToast } from '@/lib/chakraui';
 
 interface DetectedObject {
   bbox: [number, number, number, number];

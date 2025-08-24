@@ -7,7 +7,7 @@ import {
   User as FirebaseAuthUser
 } from 'firebase/auth';
 import React, { useContext, useEffect } from 'react';
-import { auth } from '../lib/firebaseConfig';
+import { auth } from '@/lib/firebase';
 
 export interface IAuthContext {
   authUser: FirebaseAuthUser | null;
