@@ -31,6 +31,7 @@ const AccountDetails = () => {
                 size={'md'}
                 fontSize="base"
                 value={user?.age}
+                readOnly
               />
             </section>
           </div>
@@ -62,6 +63,7 @@ const AccountDetails = () => {
                 size={'md'}
                 fontSize="base"
                 value={user?.phoneNumber}
+                readOnly
               />
             </section>
           </div>

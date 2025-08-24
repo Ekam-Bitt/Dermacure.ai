@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request
 import openai
+from flask_socketio import SocketIO, emit
 
 
 app = Flask(__name__)
+socketio = SocketIO(app, cors_allowed_origins="*")
 
 # Set up OpenAI API credentials
 openai.api_key = "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"
@@ -26,10 +28,23 @@ def api():
     )
     if completion.choices[0].message != None:
         return completion.choices[0].message
-
     else:
         return "Failed to Generate response!"
 
+@socketio.on('connect')
+def test_connect():
+    print('Client connected')
+    emit('my response', {'data': 'Connected'})
+
+@socketio.on('disconnect')
+def test_disconnect():
+    print('Client disconnected')
+
+@socketio.on('chatMessage')
+def handle_chat_message(data):
+    print('received message: ' + str(data))
+    emit('chatMessage', data, broadcast=True) # Echo back to all clients
+
 
 if __name__ == "__main__":
-    app.run()
+    socketio.run(app, debug=True)

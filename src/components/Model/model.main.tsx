@@ -347,12 +347,26 @@ const Model = () => {
 
   const handleGenerateReport = async () => {
     try {
+      // Add this check
+      if (!user || !user.uid) {
+        toast({
+          title: 'Authentication Error',
+          description: 'User not authenticated or UID not available. Please log in again.',
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+          position: 'top-right'
+        });
+        return; // Stop execution if user or UID is missing
+      }
+
+      console.log("User UID before upload:", user.uid); // Add this line
       let _suspectedDisease = {
         diseaseName: '',
         diseaseDescription: ''
       };
       _suspectedDisease.diseaseName = Class[diesease as number];
-      _suspectedDisease.diseaseDescription = Summary[diesease as number];
+      _suspectedDisease.diseaseDescription = Summary[diesease as number] || '';
 
       let _reporData = { ...reportData };
       let downloadurl = await uploadImageToFirebase();
@@ -388,47 +402,40 @@ const Model = () => {
 
   //detection draw
 
-  const uploadImageToFirebase = async () => {
+  const uploadImageToFirebase = async (): Promise<string | undefined> => {
+    if (!imageUploadUrl) {
+      console.warn("No image to upload.");
+      return undefined; // Or throw an error, depending on desired behavior
+    }
+
     const date = new Date();
     const signatureRef = ref(storage, `disease/${date.getTime()}${user?.uid}`);
 
-    const uploadTask =
-      imageUploadUrl && uploadBytesResumable(signatureRef, imageUploadUrl);
-    uploadTask &&
+    const uploadTask = uploadBytesResumable(signatureRef, imageUploadUrl);
+
+    return new Promise((resolve, reject) => {
       uploadTask.on(
         'state_changed',
         (snapshot: any) => {
-          const progress = ((snapshot.bytesTransferred / snapshot.totalBytes) *
-            100) as number;
+          const progress = ((snapshot.bytesTransferred / snapshot.totalBytes) * 100) as number;
           console.log(progress);
-          switch (snapshot.state) {
-            case 'paused':
-              console.log('Upload is paused');
-              break;
-            case 'running':
-              console.log('Upload is running');
-              break;
-          }
+          // You can update a progress state here if needed
         },
         (error: any) => {
-          switch (error.code) {
-            case 'storage/unauthorized':
-              break;
-            case 'storage/canceled':
-              break;
-
-            case 'storage/unknown':
-              break;
-          }
+          console.error("Upload failed:", error);
+          reject(error); // Reject the promise on error
         },
         async () => {
-          await getDownloadURL(uploadTask.snapshot.ref).then(
-            async downloadURLOnUpload => {
-              return downloadURLOnUpload;
-            }
-          );
+          try {
+            const downloadURLOnUpload = await getDownloadURL(uploadTask.snapshot.ref);
+            resolve(downloadURLOnUpload); // Resolve the promise with the download URL
+          } catch (error) {
+            console.error("Failed to get download URL:", error);
+            reject(error); // Reject if getting download URL fails
+          }
         }
       );
+    });
   };
 
   return (

@@ -5,7 +5,7 @@ const Footer = () => {
     <div className="text-[#FFFFFF] bg-black space-y-4">
       <div className="flex md:flex-row flex-col justify-between items-center gap-4 p-4">
         <section>
-          <img src="logo.png" />
+          <img src="/logo.png" />
         </section>
 
         <section>

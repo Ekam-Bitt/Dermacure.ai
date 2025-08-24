@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 
-const socket = io('http://localhost:3000'); // Replace with your server URL
+const socket = io('http://localhost:5000'); // Replace with your server URL
 
 interface Message {
   text: string;
@@ -32,7 +32,7 @@ function Chat() {
 
   return (
     <div className="flex justify-center items-center w-full h-full text-3xl">
-      {/* <div className="chat-box">
+      <div className="chat-box">
         {messages.map((msg, index) => (
           <div key={index} className="message">
             {msg.sender}: {msg.text}
@@ -47,7 +47,7 @@ function Chat() {
           onChange={e => setMessage(e.target.value)}
         />
         <button type="submit">Send</button>
-      </form> */}
+      </form>
       <h1>Commig soon!!</h1>
     </div>
   );
