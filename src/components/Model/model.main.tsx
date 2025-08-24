@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import { loadModel } from '../../utils/loadmodel';
-import { NextPage } from 'next';
 import * as tf from '@tensorflow/tfjs';
 import '@tensorflow/tfjs';
 import { Class, Summary } from '../../database/diesease';
@@ -13,10 +12,8 @@ import {
   load as cocoModelLoad,
   ObjectDetection
 } from '@tensorflow-models/coco-ssd';
-import { ClassNames } from '@emotion/react';
 import { useReport } from '@/context/reportContext';
-import { json } from 'stream/consumers';
-import IReport from '../../../Interfaces/reportInterface';
+import IReport from '@/types/reportInterface';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '@/lib/firebase';
 import createIssue from '@/functions/report/createReport';
@@ -322,7 +319,7 @@ const Model = () => {
   const startPrediction = async () => {
     setIsloadingDiesease(true);
     if (model && image) {
-      const img = new Image();
+      const img = document.createElement('img');
       img.src = uploadedImage as string;
       img.onload = async () => {
         const tensor = tf.browser.fromPixels(img);
@@ -341,7 +338,7 @@ const Model = () => {
         setScore(predictionData[topClass]);
         setDiesease(topClass);
         setIsloadingDiesease(false);
-        generatePDF(Class[diesease as number]);
+        generatePDF(Class[topClass]);
       };
     }
   };
@@ -437,6 +434,7 @@ const Model = () => {
             reject(error); // Reject if getting download URL fails
           }
         }
+      );
     });
   };
 
@@ -495,75 +493,75 @@ const Model = () => {
               </div>
             )}
           </div>
-
-          {image && (
-            <div className="flex flex-col items-center py-4">
-              <button
-                onClick={() => {
-                  startPrediction();
-                  startDetecting();
-                }}
-                className="bg-[#15B9FF] text-white hover:bg-blue-700 w-44 h-12 rounded-full"
-              >
-                Start Predicting
-              </button>
+  
+            {image && (
+              <div className="flex flex-col items-center py-4">
+                <button
+                  onClick={() => {
+                    startPrediction();
+                    startDetecting();
+                  }}
+                  className="bg-[#15B9FF] text-white hover:bg-blue-700 w-44 h-12 rounded-full"
+                >
+                  Start Predicting
+                </button>
+              </div>
+            )}
+  
+            <canvas
+              ref={canvasRef}
+              style={{ display: 'none' }}
+              width="300"
+              height="300"
+            />
+            <div className="flex justify-evenly">
+              {uploadedImage && (
+                <>
+                  <Image
+                    ref={imageEle}
+                    src={uploadedImage}
+                    alt="sample image"
+                    width={300}
+                    height={300}
+                    className="rounded-xl"
+                  />
+                  <canvas
+                    ref={canvasEle}
+                    width={300}
+                    height={300}
+                    className="rounded-xl"
+                  />
+                </>
+              )}
             </div>
-          )}
-
-          <canvas
-            ref={canvasRef}
-            style={{ display: 'none' }}
-            width="300"
-            height="300"
-          />
-          <div className="flex justify-evenly">
-            {uploadedImage && (
+            {isloadingDiesease ? (
+              <h1 className="lg:text-2xl text-center font-bold text-blue-800 mt-4">
+                Loading...
+              </h1>
+            ) : (
               <>
-                <Image
-                  ref={imageEle}
-                  src={uploadedImage}
-                  alt="sample image"
-                  width={300}
-                  height={300}
-                  className="rounded-xl"
-                />
-                <canvas
-                  ref={canvasEle}
-                  width={300}
-                  height={300}
-                  className="rounded-xl"
-                />
+                {prediction !== null && (
+                  <div className="mt-4 flex flex-col items-center justify-center py-12 gap-4">
+                    <h2 className="text-xl font-bold">Model Prediction:</h2>
+                    <p className="text-blue-800 text-xl">
+                      {Class[diesease as number]}{' '}
+                      {/* {Math.abs((score as number) * 100).toFixed(2)}% */}
+                    </p>
+                    <p>{Summary[diesease as number]}</p>
+                    <button
+                      onClick={handleGenerateReport}
+                      className="bg-[#221389] text-white hover:bg-blue-700 w-44 h-12 rounded-full"
+                    >
+                      Generate Report
+                    </button>
+                  </div>
+                )}
               </>
             )}
           </div>
-          {isloadingDiesease ? (
-            <h1 className="lg:text-2xl text-center font-bold text-blue-800 mt-4">
-              Loading...
-            </h1>
-          ) : (
-            <>
-              {prediction !== null && (
-                <div className="mt-4 flex flex-col items-center justify-center py-12 gap-4">
-                  <h2 className="text-xl font-bold">Model Prediction:</h2>
-                  <p className="text-blue-800 text-xl">
-                    {Class[diesease as number]}{' '}
-                    {/* {Math.abs((score as number) * 100).toFixed(2)}% */}
-                  </p>
-                  <p>{Summary[diesease as number]}</p>
-                  <button
-                    onClick={handleGenerateReport}
-                    className="bg-[#221389] text-white hover:bg-blue-700 w-44 h-12 rounded-full"
-                  >
-                    Generate Report
-                  </button>
-                </div>
-              )}
-            </>
-          )}
-        </div>
-      )}
-    </div>
-  );
-};
+        )}
+      </div>
+    );
+  };
 
 export default Model;
