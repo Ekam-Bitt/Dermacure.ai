@@ -1,5 +1,5 @@
 // src/hooks/useFirebaseStorageUpload.ts
-import { useAuth } from '../../context/authContext';
+import { useAuth } from '@/context/authContext';
 import {
   getDownloadURL,
   ref,
