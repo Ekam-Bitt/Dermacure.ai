@@ -2,8 +2,11 @@ import { collection, getDocs, query, where } from 'firebase/firestore';
 import IReport from '../../../Interfaces/reportInterface';
 import { db } from '../../../lib/firebaseConfig';
 
-export default async function getReportByDocId(docid: string, patientId:string) {
-  let reportDataAll: Partial<IReport>[]= [];
+export default async function getReportByDocId(
+  docid: string,
+  patientId: string
+) {
+  let reportDataAll: Partial<IReport>[] = [];
   try {
     if (docid) {
       const q = query(
@@ -15,8 +18,8 @@ export default async function getReportByDocId(docid: string, patientId:string) 
       if (reportDataSnap.empty) {
         return null;
       } else {
-        reportDataSnap.forEach((doc) => {
-          reportDataAll.push({...doc.data()})
+        reportDataSnap.forEach(doc => {
+          reportDataAll.push({ ...doc.data() });
         });
         return reportDataAll;
       }

@@ -43,7 +43,7 @@ const Model = () => {
   const [pdfGenerated, setPdfGenerated] = useState(false);
   const [pdfBlob, setPdfBlob] = useState<any>(null);
   const { user } = useUser();
-  const [imageUploadUrl, setImageUploadUrl] = useState<any>()
+  const [imageUploadUrl, setImageUploadUrl] = useState<any>();
 
   //OBJECT DETECTION //
   const canvasEle = useRef<HTMLCanvasElement | null>(null);
@@ -54,7 +54,7 @@ const Model = () => {
   const [detectedObjects, setDetectedObjects] = useState<DetectedObject[]>([]);
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const { reportData, setReportData } = useReport()
+  const { reportData, setReportData } = useReport();
   const toast = useToast();
 
   const draw = (ctx: CanvasRenderingContext2D, objects: DetectedObject[]) => {
@@ -255,7 +255,7 @@ const Model = () => {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const file = event.target.files?.[0];
-    setImageUploadUrl(file)
+    setImageUploadUrl(file);
 
     if (file) {
       const imageUrl = URL.createObjectURL(file);
@@ -343,30 +343,28 @@ const Model = () => {
       };
     }
   };
-  useEffect(() => { }, []);
+  useEffect(() => {}, []);
 
   const handleGenerateReport = async () => {
-
-    try{
-
+    try {
       let _suspectedDisease = {
-        diseaseName:'',
+        diseaseName: '',
         diseaseDescription: ''
-      }
+      };
       _suspectedDisease.diseaseName = Class[diesease as number];
       _suspectedDisease.diseaseDescription = Summary[diesease as number];
-  
-      let _reporData = {...reportData}
-      let downloadurl = await uploadImageToFirebase()
-      _reporData.suspectedDisease = _suspectedDisease
+
+      let _reporData = { ...reportData };
+      let downloadurl = await uploadImageToFirebase();
+      _reporData.suspectedDisease = _suspectedDisease;
       _reporData.patientId = user?.uid as string;
       _reporData.patientName = user?.name as string;
       _reporData.patientAge = user?.age as number;
       _reporData.isVerifiedByDoc = false;
-      _reporData.diseaseImage = downloadurl as unknown as string
+      _reporData.diseaseImage = downloadurl as unknown as string;
       setReportData(_reporData);
-      
-      createIssue(_reporData)
+
+      createIssue(_reporData);
 
       toast({
         title: 'Report generated successfully',
@@ -374,32 +372,25 @@ const Model = () => {
         status: 'success',
         duration: 5000,
         isClosable: true,
-        position: 'top-right',
+        position: 'top-right'
       });
-    }catch(err){
-
+    } catch (err) {
       toast({
         title: 'Oops! There ws have been an error',
         description: 'There was an error generating your report',
         status: 'error',
         duration: 5000,
         isClosable: true,
-        position: 'top-right',
+        position: 'top-right'
       });
     }
-    
-    
-
-  }
+  };
 
   //detection draw
 
   const uploadImageToFirebase = async () => {
     const date = new Date();
-    const signatureRef = ref(
-      storage,
-      `disease/${date.getTime()}${user?.uid}`
-    );
+    const signatureRef = ref(storage, `disease/${date.getTime()}${user?.uid}`);
 
     const uploadTask =
       imageUploadUrl && uploadBytesResumable(signatureRef, imageUploadUrl);
@@ -439,8 +430,6 @@ const Model = () => {
         }
       );
   };
-
-  
 
   return (
     <div className="bg-blue-100  flex flex-col min-h-[40rem] justify-center items-center p-12">
@@ -528,8 +517,8 @@ const Model = () => {
                   width={300}
                   height={300}
                   className="rounded-xl"
-                //layout="responsive"
-                //objectFit="cover"
+                  //layout="responsive"
+                  //objectFit="cover"
                 />
                 <canvas
                   ref={canvasEle}

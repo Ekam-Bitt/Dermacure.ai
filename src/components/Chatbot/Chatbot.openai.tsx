@@ -63,7 +63,8 @@ export default function BotPage() {
       {conversation.length > 4 ? (
         <button
           onClick={() =>
-            window.location.href = '/dashboard/patient-dashboard?currentTab=E-Clinic'
+            (window.location.href =
+              '/dashboard/patient-dashboard?currentTab=E-Clinic')
           }
           className="px-4 py-2 mt-4 bg-red-500 text-white rounded-md hover:bg-blue-600 focus:outline-none"
         >

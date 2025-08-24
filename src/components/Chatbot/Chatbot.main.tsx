@@ -2,7 +2,15 @@ import React, { useEffect } from 'react';
 
 const BotsonicWidget: React.FC = () => {
   useEffect(() => {
-    (function (w: any, d: any, s: any, o: any, f: any, js: HTMLScriptElement, fjs: HTMLScriptElement) {
+    (function (
+      w: any,
+      d: any,
+      s: any,
+      o: any,
+      f: any,
+      js: HTMLScriptElement,
+      fjs: HTMLScriptElement
+    ) {
       w['botsonic_widget'] = o;
       w[o] =
         w[o] ||
@@ -12,7 +20,7 @@ const BotsonicWidget: React.FC = () => {
       (js = d.createElement(s)), (fjs = d.getElementsByTagName(s)[0]);
       js.id = o;
       js.src = f;
-      js.async = 1;
+      js.async = true;
       fjs.parentNode!.insertBefore(js, fjs);
     })(
       window,

@@ -1,15 +1,16 @@
 import { useState } from 'react';
-import FirebaseAuth, {
+import {
+  getAuth,
   signInWithPhoneNumber,
   RecaptchaVerifier,
-  getAuth,
-  signOut
-} from '@firebase/auth';
+  signOut,
+  User as FirebaseAuthUser
+} from 'firebase/auth';
 import React, { useContext, useEffect } from 'react';
 import { auth } from '../lib/firebaseConfig';
 
 export interface IAuthContext {
-  authUser: FirebaseAuth.User | null;
+  authUser: FirebaseAuthUser | null;
   loginWithPhoneNumber: (phoneNumber: string) => any;
   handleOtpVerify: (VerificationCode: string) => any;
   logout: () => any;
@@ -30,7 +31,7 @@ export function useAuth() {
 
 export function AuthContextProvider({ children }: any) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [authUser, setAuthUser] = useState<FirebaseAuth.User | null>(
+  const [authUser, setAuthUser] = useState<FirebaseAuthUser | null>(
     defaultValues.authUser
   );
 

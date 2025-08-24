@@ -52,7 +52,7 @@ const Subscription = () => {
                   <ul>
                     <li>Access to essential AI and ML-based skin analysis.</li>
                     <li>
-                      Opportunity to test and understand the platform's
+                      Opportunity to test and understand the platform&apos;s
                       capabilities.
                     </li>
                     <li>

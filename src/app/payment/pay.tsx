@@ -35,6 +35,7 @@ const StripePricingTable = () => {
     <div>
       {/* Render your pricing table here */}
       <>
+        {/* @ts-ignore */}
         <stripe-pricing-table
           pricing-table-id="prctbl_1NrVE1SDKHZ803Jh2InMSL1A"
           publishable-key="pk_test_51NrUlfSDKHZ803JhsWSfCU4jKzLDONRxG2XjvDyMPOmSAOo6WN6clhrdZhtTxWzdFi2jGdAWWfOAQMJvbus3FDon00KTBT4ZlD"

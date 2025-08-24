@@ -3,14 +3,15 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 import { getAuth } from 'firebase/auth';
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: 'AIzaSyAzbY5UTBTRIgd1zjKbWoJHjKbWKElDo2E',
-  authDomain: 'dermacure-ai.firebaseapp.com',
-  projectId: 'dermacure-ai',
-  storageBucket: 'dermacure-ai.appspot.com',
-  messagingSenderId: '731769293567',
-  appId: '1:731769293567:web:c6a0a41f39f635179e9aca',
-  measurementId: 'G-VE44JEJX7W'
+  apiKey: 'AIzaSyAsRerwCCbxkRVB2Wt_uWoYPMxWQrthvfc',
+  authDomain: 'dermacure-ai-27ae5.firebaseapp.com',
+  projectId: 'dermacure-ai-27ae5',
+  storageBucket: 'dermacure-ai-27ae5.firebasestorage.app',
+  messagingSenderId: '433476874873',
+  appId: '1:433476874873:web:d64e25df75b5d7b5659aa8',
+  measurementId: 'G-5BZDZFGS3Z'
 };
 
 // Initialize Firebase

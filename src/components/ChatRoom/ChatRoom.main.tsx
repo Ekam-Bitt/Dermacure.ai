@@ -31,7 +31,7 @@ function Chat() {
   };
 
   return (
-    <div className='flex justify-center items-center w-full h-full text-3xl'>
+    <div className="flex justify-center items-center w-full h-full text-3xl">
       {/* <div className="chat-box">
         {messages.map((msg, index) => (
           <div key={index} className="message">

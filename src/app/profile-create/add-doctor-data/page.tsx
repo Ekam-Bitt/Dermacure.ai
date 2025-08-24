@@ -6,15 +6,10 @@ import { useRouter } from 'next/navigation';
 import Navbar from '@/components/Header/Navbar.main';
 import IUser from '../../../../Interfaces/userInterface';
 import medicalSpecialties from '../../../../data/medialSpeciality';
-import {
-  getDownloadURL,
-  ref,
-  uploadBytesResumable,
-  uploadString
-} from 'firebase/storage';
-import { storage } from '../../../../lib/firebaseConfig';
 import { useAuth } from '../../../../context/authContext';
 import updateUserData from '@/functions/user/updateUserData';
+import useFirebaseStorageUpload from '../../../../src/hooks/useFirebaseStorageUpload'; // Regular import
+
 const CreateDoctorProfile = () => {
   const [docData, setDocData] = useState<Partial<IUser>>({
     docSignature: '',
@@ -26,6 +21,9 @@ const CreateDoctorProfile = () => {
   const [fileUrl, setFileUrl] = useState<any>(null);
   const router = useRouter();
   const { authUser } = useAuth();
+
+  const { uploadImageToFirebase } = useFirebaseStorageUpload(fileUrl);
+
 
   const validateForm = () => {
     if (
@@ -40,7 +38,7 @@ const CreateDoctorProfile = () => {
   };
 
   const handleUpdateDocData = async () => {
-    const signatureUrl = await uploadImageToFirebase()
+    const signatureUrl = await uploadImageToFirebase();
     
     const data = {
       docLicense: docData.docLicense as string,
@@ -61,53 +59,6 @@ const CreateDoctorProfile = () => {
     reader.onload = readerEvent => {
       readerEvent.target?.result && setSelectedFile(readerEvent.target.result);
     };
-  };
-
-  const uploadImageToFirebase = async () => {
-    const date = new Date();
-    const signatureRef = ref(
-      storage,
-      `signature${date.getTime()}${authUser?.uid}`
-    );
-
-    const uploadTask =
-      fileUrl && uploadBytesResumable(signatureRef, fileUrl);
-    uploadTask &&
-      uploadTask.on(
-        'state_changed',
-        (snapshot: any) => {
-          const progress = ((snapshot.bytesTransferred / snapshot.totalBytes) *
-            100) as number;
-          console.log(progress);
-          switch (snapshot.state) {
-            case 'paused':
-              console.log('Upload is paused');
-              break;
-            case 'running':
-              console.log('Upload is running');
-              break;
-          }
-        },
-        (error: any) => {
-          switch (error.code) {
-            case 'storage/unauthorized':
-              break;
-            case 'storage/canceled':
-              break;
-
-            case 'storage/unknown':
-              break;
-          }
-        },
-        async () => {
-          await getDownloadURL(uploadTask.snapshot.ref).then(
-            async downloadURLOnUpload => {
-              console.log(downloadURLOnUpload);
-              return downloadURLOnUpload;
-            }
-          );
-        }
-      );
   };
 
   return (
