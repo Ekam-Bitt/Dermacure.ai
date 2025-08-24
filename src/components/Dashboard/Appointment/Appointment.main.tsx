@@ -13,14 +13,14 @@ const Appointment = () => {
       return _reports.push(rep as IReport);
     });
 
-    console.log(_reports);
+    
 
     setReports(_reports);
   };
 
   useEffect(() => {
     handleReportFetch();
-  }, []);
+  }, [handleReportFetch]);
   return (
     <div className="text-black space-y-3">
       <h1 className="text-xl">All Your Appointments</h1>

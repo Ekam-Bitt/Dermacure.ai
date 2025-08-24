@@ -12,7 +12,9 @@ const PatientDashboardPage = () => {
     <>
       <div className="bg-blueBackground pb-6">
         <Navbar />
-        <Suspense fallback={<div>Loading Patient Dashboard...</div>}> {/* Add Suspense boundary */}
+        <Suspense fallback={<div>Loading Patient Dashboard...</div>}>
+          {' '}
+          {/* Add Suspense boundary */}
           <PatientDashboard />
         </Suspense>
       </div>

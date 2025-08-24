@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Image from 'next/image';
+
 interface TestimonyCardProps {
   imageSrc: string;
   title: string;
@@ -16,7 +18,7 @@ export default function TestimonyCard({
   return (
     <div className="max-w-md py-4 px-8 m-4 h-[272px] bg-white rounded-xl border border-black">
       <div className="flex flex-row justify-between items-center">
-        <img
+        <Image
           src={imageSrc}
           alt={author}
           className="w-20 h-20 object-cover rounded-full"

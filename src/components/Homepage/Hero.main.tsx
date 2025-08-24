@@ -7,6 +7,7 @@ const Hero = () => {
       <img
         src="/hero.png"
         className="absolute inset-0 object-cover w-full h-full"
+        alt="Dermacure.ai Hero Background"
       />
       <section className="absolute inset-0 flex flex-col justify-center items-center text-center gap-3">
         <h1 className="text-white text-lg sm:text-3xl md:text-6xl leading-[5rem] font-holtwood">

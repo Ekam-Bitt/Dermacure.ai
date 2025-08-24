@@ -5,14 +5,10 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { useUser } from '@/context/usercontext';
-import {
-  Avatar,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList
-} from '@/lib/chakraui';
+import { Avatar, Menu, MenuButton, MenuItem, MenuList } from '@/lib/chakraui';
 import { useAuth } from '@/context/authContext';
+
+import Image from 'next/image';
 
 const Navbar = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -42,7 +38,7 @@ const Navbar = () => {
       <div className="flex justify-between items-center w-full">
         <div className="flex justify-between items-center gap-4">
           <Link href="/">
-            <img src="/Frame.svg" className="w-12" alt="Logo" />
+            <Image src="/Frame.svg" className="w-12" alt="Logo" />
           </Link>
           <Link href="/" className="font-bold text-lg holtwood">
             DERMACURE.AI

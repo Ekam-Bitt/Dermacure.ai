@@ -6,8 +6,8 @@ const createIssue = async (report: IReport) => {
   try {
     await addDoc(collection(db, 'report'), report);
   } catch (err) {
-    console.log('There was an error');
-    console.error(err);
+    
+    
   }
 };
 

@@ -14,7 +14,6 @@ const createUser = async (user: any) => {
       phoneNumber: user.phoneNumber
     });
   } else {
-    console.log('User already exists');
   }
 };
 

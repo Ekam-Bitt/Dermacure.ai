@@ -63,7 +63,7 @@ export function AuthContextProvider({ children }: any) {
         window.confirmationResult = confirmationResult;
       })
       .catch(error => {
-        console.log(error);
+        
       });
   }
 
@@ -75,7 +75,7 @@ export function AuthContextProvider({ children }: any) {
         setAuthUser(user);
       })
       .catch((err: any) => {
-        console.log(err);
+        
       });
   }
 
@@ -89,7 +89,7 @@ export function AuthContextProvider({ children }: any) {
       setAuthUser(user);
       setIsLoading(false);
     });
-  }, [auth]);
+  }, []);
 
   const value = {
     authUser,

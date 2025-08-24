@@ -98,7 +98,7 @@ const ModelObjectDetection = (props: Props) => {
       setObjectDetector(model);
       setIsLoading(false);
     } catch (error) {
-      console.error(error);
+      
     }
   };
 
@@ -119,9 +119,9 @@ const ModelObjectDetection = (props: Props) => {
     }
   };
 
-  console.log(objectDetector);
-  console.log(detectedObjects);
-  console.log(uploadedImage);
+  
+  
+  
 
   return (
     <>

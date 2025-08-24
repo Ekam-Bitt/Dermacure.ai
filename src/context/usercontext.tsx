@@ -51,7 +51,7 @@ export function UserContextProvider({ children }: any) {
         });
       }
     } catch (e) {
-      console.error(e);
+      
     }
     setLoader(false);
   }, [authUser]);

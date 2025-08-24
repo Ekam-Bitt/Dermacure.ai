@@ -8,6 +8,6 @@ async function convertH5ToJSON(inputH5FilePath: any, outputJsonFilePath: any) {
 
   fs.writeFileSync(outputJsonFilePath, jsonStr);
 
-  console.log(`Model converted and saved to ${outputJsonFilePath}`);
+  
   return outputJsonFilePath;
 }

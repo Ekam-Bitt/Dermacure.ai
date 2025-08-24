@@ -41,13 +41,14 @@ const User = () => {
   // const router = useRouter();
 
   const { user } = useUser();
-  console.log(user?.role);
+  
 
   return (
     <Suspense fallback={<div>Loading Dashboard...</div>}>
       <div className="bg-blueBackground pb-6">
         <Navbar />
-        <DynamicDashboardContent /> {/* Render the dynamically imported component */}
+        <DynamicDashboardContent />{' '}
+        {/* Render the dynamically imported component */}
       </div>
     </Suspense>
   );

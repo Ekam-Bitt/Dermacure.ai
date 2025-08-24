@@ -18,6 +18,6 @@ export default async function getAllReports() {
       }
     }
   } catch (err) {
-    console.log(err);
+    
   }
 }

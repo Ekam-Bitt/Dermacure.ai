@@ -24,7 +24,5 @@ export default async function getReportByDocId(
         return reportDataAll;
       }
     }
-  } catch (err) {
-    console.log(err);
-  }
+  } catch (err) {}
 }

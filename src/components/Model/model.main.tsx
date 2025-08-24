@@ -22,6 +22,8 @@ import { storage } from '@/lib/firebase';
 import createIssue from '@/functions/report/createReport';
 import { useToast } from '@/lib/chakraui';
 
+import Image from 'next/image';
+
 interface DetectedObject {
   bbox: [number, number, number, number];
   class: string;
@@ -130,7 +132,7 @@ const Model = () => {
       setObjectDetector(model);
       setIsLoading(false);
     } catch (error) {
-      console.error(error);
+      
     }
   };
 
@@ -216,7 +218,7 @@ const Model = () => {
       setPdfBlob(blob);
       setPdfGenerated(true);
     } catch (error) {
-      console.error('Error generating PDF:', error);
+      
     }
   };
 
@@ -300,7 +302,7 @@ const Model = () => {
           setUseWebcam(true);
         }
       } catch (error) {
-        console.error('Error accessing webcam:', error);
+        
       }
     }
   };
@@ -351,7 +353,8 @@ const Model = () => {
       if (!user || !user.uid) {
         toast({
           title: 'Authentication Error',
-          description: 'User not authenticated or UID not available. Please log in again.',
+          description:
+            'User not authenticated or UID not available. Please log in again.',
           status: 'error',
           duration: 5000,
           isClosable: true,
@@ -360,7 +363,7 @@ const Model = () => {
         return; // Stop execution if user or UID is missing
       }
 
-      console.log("User UID before upload:", user.uid); // Add this line
+      
       let _suspectedDisease = {
         diseaseName: '',
         diseaseDescription: ''
@@ -403,10 +406,7 @@ const Model = () => {
   //detection draw
 
   const uploadImageToFirebase = async (): Promise<string | undefined> => {
-    if (!imageUploadUrl) {
-      console.warn("No image to upload.");
-      return undefined; // Or throw an error, depending on desired behavior
-    }
+    
 
     const date = new Date();
     const signatureRef = ref(storage, `disease/${date.getTime()}${user?.uid}`);
@@ -417,22 +417,19 @@ const Model = () => {
       uploadTask.on(
         'state_changed',
         (snapshot: any) => {
-          const progress = ((snapshot.bytesTransferred / snapshot.totalBytes) * 100) as number;
-          console.log(progress);
+          const progress = ((snapshot.bytesTransferred / snapshot.totalBytes) *
+            100) as number;
+          
           // You can update a progress state here if needed
         },
-        (error: any) => {
-          console.error("Upload failed:", error);
-          reject(error); // Reject the promise on error
-        },
+        
         async () => {
           try {
-            const downloadURLOnUpload = await getDownloadURL(uploadTask.snapshot.ref);
+            const downloadURLOnUpload = await getDownloadURL(
+              uploadTask.snapshot.ref
+            );
             resolve(downloadURLOnUpload); // Resolve the promise with the download URL
-          } catch (error) {
-            console.error("Failed to get download URL:", error);
-            reject(error); // Reject if getting download URL fails
-          }
+          
         }
       );
     });
@@ -517,15 +514,13 @@ const Model = () => {
           <div className="flex justify-evenly">
             {uploadedImage && (
               <>
-                <img
+                <Image
                   ref={imageEle}
                   src={uploadedImage}
                   alt="sample image"
                   width={300}
                   height={300}
                   className="rounded-xl"
-                  //layout="responsive"
-                  //objectFit="cover"
                 />
                 <canvas
                   ref={canvasEle}

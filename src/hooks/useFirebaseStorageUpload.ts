@@ -29,18 +29,16 @@ const useFirebaseStorageUpload = (fileUrl: any) => {
         (snapshot: any) => {
           const progress = ((snapshot.bytesTransferred / snapshot.totalBytes) *
             100) as number;
-          console.log(progress);
           // You can update a progress state here if needed
         },
         (error: any) => {
-          console.error(error);
+          
           reject(error);
         },
         async () => {
           const downloadURLOnUpload = await getDownloadURL(
             uploadTask.snapshot.ref
           );
-          console.log(downloadURLOnUpload);
           resolve(downloadURLOnUpload);
         }
       );

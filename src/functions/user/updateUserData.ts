@@ -10,6 +10,5 @@ export default async function updateUserData(
     const userDocRef = doc(db, `users/${userid}`);
     await updateDoc(userDocRef, data);
   } catch (err) {
-    console.log(err);
   }
 }

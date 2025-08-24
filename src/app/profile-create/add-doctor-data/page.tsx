@@ -4,11 +4,13 @@ import React, { useEffect, useState } from 'react';
 import { Input, Select } from '@/lib/chakraui';
 import { useRouter } from 'next/navigation';
 import Navbar from '@/components/Header/Navbar.main';
-import IUser from '../../../../Interfaces/userInterface';
+import IUser from '@/types/userInterface';
 import medicalSpecialties from '@/database/medialSpeciality';
 import { useAuth } from '@/context/authContext';
 import updateUserData from '@/functions/user/updateUserData';
 import useFirebaseStorageUpload from '../../../../src/hooks/useFirebaseStorageUpload'; // Regular import
+
+import Image from 'next/image';
 
 const CreateDoctorProfile = () => {
   const [docData, setDocData] = useState<Partial<IUser>>({
@@ -24,7 +26,6 @@ const CreateDoctorProfile = () => {
 
   const { uploadImageToFirebase } = useFirebaseStorageUpload(fileUrl);
 
-
   const validateForm = () => {
     if (
       docData.docSignature === '' ||
@@ -39,7 +40,7 @@ const CreateDoctorProfile = () => {
 
   const handleUpdateDocData = async () => {
     const signatureUrl = await uploadImageToFirebase();
-    
+
     const data = {
       docLicense: docData.docLicense as string,
       docSignature: signatureUrl as unknown as string,
@@ -52,7 +53,7 @@ const CreateDoctorProfile = () => {
   const addImagetoPost = (e: any) => {
     const reader = new FileReader();
     if (e.target.files[0]) {
-      setFileUrl(e.target.files[0])
+      setFileUrl(e.target.files[0]);
       reader.readAsDataURL(e.target.files[0]);
     }
 
@@ -121,7 +122,7 @@ const CreateDoctorProfile = () => {
               validation
             </p>
             {selectedFile ? (
-              <img
+              <Image
                 src={selectedFile}
                 className="h-[10rem] w-full object-contain"
                 alt="image of signature"

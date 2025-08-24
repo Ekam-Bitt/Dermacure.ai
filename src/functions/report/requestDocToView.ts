@@ -11,6 +11,5 @@ export default async function requestedDocToView(
       requestedDocId: docid
     });
   } catch (e) {
-    console.log(e);
   }
 }

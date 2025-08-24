@@ -1,6 +1,8 @@
 import React from 'react';
 import ContactForm from './contact.form';
 
+import Image from 'next/image';
+
 const ContactUs = () => {
   return (
     <div id="contact">
@@ -12,7 +14,7 @@ const ContactUs = () => {
               Ready to get started, or have a question for our team? Reach out,
               and we’ll respond as soon as possible.
             </p>
-            <img src="/Doctor.svg" alt="skin" className="sm:pr-8" />
+            <Image src="/Doctor.svg" alt="skin" className="sm:pr-8"/>
           </div>
           <div className="w-full lg:w-[45vw]">
             <ContactForm />

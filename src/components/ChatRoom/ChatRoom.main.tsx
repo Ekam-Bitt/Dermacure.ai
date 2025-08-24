@@ -14,17 +14,23 @@ function Chat() {
 
   useEffect(() => {
     // Initialize Pusher
-    const pusher = new Pusher(process.env.NEXT_PUBLIC_PUSHER_APP_KEY as string, {
-      cluster: process.env.NEXT_PUBLIC_PUSHER_APP_CLUSTER as string,
-      // Add any other options if needed, e.g., encrypted: true
-    });
+    const pusher = new Pusher(
+      process.env.NEXT_PUBLIC_PUSHER_APP_KEY as string,
+      {
+        cluster: process.env.NEXT_PUBLIC_PUSHER_APP_CLUSTER as string
+        // Add any other options if needed, e.g., encrypted: true
+      }
+    );
 
     // Subscribe to the channel
     const channel = pusher.subscribe('chat-channel');
 
     // Bind to the 'new-message' event
-    channel.bind('new-message', function(data: { message: string }) {
-      setMessages((prevMessages) => [...prevMessages, { text: data.message, sender: 'Chatbot' }]);
+    channel.bind('new-message', function (data: { message: string }) {
+      setMessages(prevMessages => [
+        ...prevMessages,
+        { text: data.message, sender: 'Chatbot' }
+      ]);
     });
 
     // Clean up on unmount
@@ -39,16 +45,16 @@ function Chat() {
     if (!message.trim()) return;
 
     const userMessage: Message = { text: message, sender: 'You' };
-    setMessages((prevMessages) => [...prevMessages, userMessage]);
+    setMessages(prevMessages => [...prevMessages, userMessage]);
 
     try {
       // Send the message to your Vercel serverless function
       const response = await fetch('/api/chatbot', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ message: message }),
+        body: JSON.stringify({ message: message })
       });
 
       if (!response.ok) {
@@ -56,10 +62,12 @@ function Chat() {
       }
 
       // The chatbot response will come via Pusher, so no need to process here
-
     } catch (error) {
-      console.error('Error sending message:', error);
-      setMessages((prevMessages) => [...prevMessages, { text: 'Error sending message.', sender: 'System' }]);
+      
+      setMessages(prevMessages => [
+        ...prevMessages,
+        { text: 'Error sending message.', sender: 'System' }
+      ]);
     }
 
     // Clear the input field

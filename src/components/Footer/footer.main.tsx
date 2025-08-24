@@ -1,11 +1,13 @@
 import React from 'react';
 
+import Image from 'next/image';
+
 const Footer = () => {
   return (
     <div className="text-[#FFFFFF] bg-black space-y-4">
       <div className="flex md:flex-row flex-col justify-between items-center gap-4 p-4">
         <section>
-          <img src="/logo.png" />
+          <Image src="/logo.png" alt="Dermacure.ai Logo"/>
         </section>
 
         <section>

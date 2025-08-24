@@ -33,10 +33,6 @@ export default function RootLayout({
       <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Holtwood+One+SC&display=swap"
-          rel="stylesheet"
-        />
         <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
       </Head>
       <body className={hammersmith.className}>
