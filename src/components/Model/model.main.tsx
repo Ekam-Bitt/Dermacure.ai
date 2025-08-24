@@ -422,16 +422,21 @@ const Model = () => {
           
           // You can update a progress state here if needed
         },
-        
-        async () => {
+        (error: any) => { // onError callback
+          // console.error('Upload failed:', error); // Removed as per previous fix
+          reject(error); // Reject the promise on error
+        },
+        async () => { // onComplete callback
           try {
             const downloadURLOnUpload = await getDownloadURL(
               uploadTask.snapshot.ref
             );
             resolve(downloadURLOnUpload); // Resolve the promise with the download URL
-          
+          } catch (error) {
+            // console.error('Failed to get download URL:', error); // Removed as per previous fix
+            reject(error); // Reject if getting download URL fails
+          }
         }
-      );
     });
   };
 
