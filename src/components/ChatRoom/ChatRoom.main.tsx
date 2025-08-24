@@ -1,9 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import io from 'socket.io-client';
-
-const socket = io('http://localhost:5000'); // Replace with your server URL
+import Pusher from 'pusher-js';
 
 interface Message {
   text: string;
@@ -15,16 +13,54 @@ function Chat() {
   const [messages, setMessages] = useState<Message[]>([]);
 
   useEffect(() => {
-    // Listen for incoming messages
-    socket.on('chatMessage', (message: Message) => {
-      setMessages([...messages, message]);
+    // Initialize Pusher
+    const pusher = new Pusher(process.env.NEXT_PUBLIC_PUSHER_APP_KEY as string, {
+      cluster: process.env.NEXT_PUBLIC_PUSHER_APP_CLUSTER as string,
+      // Add any other options if needed, e.g., encrypted: true
     });
-  }, [messages]);
 
-  const handleSendMessage = (e: React.FormEvent) => {
+    // Subscribe to the channel
+    const channel = pusher.subscribe('chat-channel');
+
+    // Bind to the 'new-message' event
+    channel.bind('new-message', function(data: { message: string }) {
+      setMessages((prevMessages) => [...prevMessages, { text: data.message, sender: 'Chatbot' }]);
+    });
+
+    // Clean up on unmount
+    return () => {
+      pusher.unsubscribe('chat-channel');
+      pusher.disconnect();
+    };
+  }, []); // Empty dependency array to run once on mount
+
+  const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Send the message to the server
-    socket.emit('chatMessage', { text: message });
+    if (!message.trim()) return;
+
+    const userMessage: Message = { text: message, sender: 'You' };
+    setMessages((prevMessages) => [...prevMessages, userMessage]);
+
+    try {
+      // Send the message to your Vercel serverless function
+      const response = await fetch('/api/chatbot', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: message }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      // The chatbot response will come via Pusher, so no need to process here
+
+    } catch (error) {
+      console.error('Error sending message:', error);
+      setMessages((prevMessages) => [...prevMessages, { text: 'Error sending message.', sender: 'System' }]);
+    }
 
     // Clear the input field
     setMessage('');
@@ -48,7 +84,7 @@ function Chat() {
         />
         <button type="submit">Send</button>
       </form>
-      <h1>Commig soon!!</h1>
+      {/* <h1>Commig soon!!</h1> */}
     </div>
   );
 }
