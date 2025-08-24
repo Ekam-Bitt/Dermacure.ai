@@ -22,6 +22,8 @@ export default function TestimonyCard({
           src={imageSrc}
           alt={author}
           className="w-20 h-20 object-cover rounded-full"
+          width={80}
+          height={80}
         />
         <h2 className="text-gray-800 h-20 w-64 flex items-center text-2xl">
           {title}

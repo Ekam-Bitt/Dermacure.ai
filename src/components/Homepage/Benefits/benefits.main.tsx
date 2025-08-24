@@ -8,9 +8,13 @@ export default function Benefits() {
       <h1 className="text-3xl pl-8">Benefits</h1>
       <div className="relative inset-0">
         <div className="flex flex-col-reverse gap-4 lg:flex-row flex-wrap items-start max-w-full m-auto py-12">
-          <div className="md:w-[67vw] md:mb-6 lg:w-[50vw] mb-12 pr-12 md:pr-0">
-            <Image src="/skin.svg" alt="skin" className="sm:pr-8"/>
-          </div>
+          <Image
+            src="/skin.svg"
+            alt="skin"
+            className="hidden md:block sm:pr-8"
+            width={700}
+            height={600}
+          />
           <div className=" w-full m-auto lg:m-0 md:w-[67%] lg:w-[40%] lg:ml-20">
             <CustomTabs />
           </div>
@@ -22,7 +26,7 @@ export default function Benefits() {
         </h1>
       </div>
       <div className=" w-screen h-[vw] bg-gradient-to-b from-[#15B9FF] to-[#76D6FF]">
-        <Image src="/Ellipse.svg" alt="Gradient circle" className="w-screen" />
+        <Image src="/Ellipse.svg" alt="Gradient circle" className="w-screen" width={1920} height={1080} />
       </div>
     </div>
   );

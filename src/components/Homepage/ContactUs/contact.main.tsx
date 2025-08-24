@@ -14,7 +14,7 @@ const ContactUs = () => {
               Ready to get started, or have a question for our team? Reach out,
               and we’ll respond as soon as possible.
             </p>
-            <Image src="/Doctor.svg" alt="skin" className="sm:pr-8"/>
+            <Image src="/Doctor.svg" alt="skin" className="sm:pr-8" width={500} height={500}/>
           </div>
           <div className="w-full lg:w-[45vw]">
             <ContactForm />

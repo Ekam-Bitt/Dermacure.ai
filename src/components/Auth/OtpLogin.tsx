@@ -190,7 +190,7 @@ function OtpLogin() {
       </Button>
 
       <div className="p-10 text-center">
-        {error && <p className="text-red-500">{error}</p>}
+        {error && !isPending && <p className="text-red-500">{error}</p>}
         {success && <p className="text-green-500">{success}</p>}
       </div>
 

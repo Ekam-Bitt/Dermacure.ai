@@ -28,7 +28,7 @@ const CreateDoctorProfile = () => {
 
   const validateForm = () => {
     if (
-      docData.docSignature === '' ||
+      !selectedFile ||
       docData.docLicense === '' ||
       docData.docSpeciality === ''
     ) {
@@ -39,15 +39,20 @@ const CreateDoctorProfile = () => {
   };
 
   const handleUpdateDocData = async () => {
-    const signatureUrl = await uploadImageToFirebase();
+    try {
+      const signatureUrl = await uploadImageToFirebase();
 
-    const data = {
-      docLicense: docData.docLicense as string,
-      docSignature: signatureUrl as unknown as string,
-      docSpeciality: docData.docSpeciality as string
-    };
-    await updateUserData(authUser?.uid, data);
-    router.push('/dashboard?currentTab=E-Clinic');
+      const data = {
+        docLicense: docData.docLicense as string,
+        docSignature: signatureUrl as unknown as string,
+        docSpeciality: docData.docSpeciality as string
+      };
+      await updateUserData(authUser?.uid, data);
+      router.push('/dashboard?currentTab=E-Clinic');
+    } catch (error) {
+      console.error("Error uploading signature or updating user data:", error);
+      // Optionally, display an error message to the user
+    }
   };
 
   const addImagetoPost = (e: any) => {

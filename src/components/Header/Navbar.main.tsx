@@ -38,7 +38,7 @@ const Navbar = () => {
       <div className="flex justify-between items-center w-full">
         <div className="flex justify-between items-center gap-4">
           <Link href="/">
-            <Image src="/Frame.svg" className="w-12" alt="Logo" />
+            <Image src="/Frame.svg" width={48} height={48} className="w-12" alt="Logo" />
           </Link>
           <Link href="/" className="font-bold text-lg holtwood">
             DERMACURE.AI
