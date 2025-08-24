@@ -11,7 +11,7 @@ import {
 import React, { useContext } from 'react';
 import { CircularProgress } from '@chakra-ui/react';
 import { useAuth } from './authContext';
-import IUser from '../Interfaces/userInterface';
+import IUser from '../types/userInterface';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 

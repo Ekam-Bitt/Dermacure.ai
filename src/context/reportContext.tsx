@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import React, { useContext, useEffect } from 'react';
 import { auth } from '@/lib/firebase';
-import IReport from '../Interfaces/reportInterface';
+import IReport from '../types/reportInterface';
 
 export interface IReportContext {
   reportData: IReport;

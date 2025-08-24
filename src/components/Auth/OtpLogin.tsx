@@ -58,13 +58,6 @@ function OtpLogin() {
     };
   }, []);
 
-  useEffect(() => {
-    const hasEnteredAllDigits = otp.length === 6;
-    if (hasEnteredAllDigits) {
-      verifyOtp();
-    }
-  }, [otp, verifyOtp]);
-
   const verifyOtp = async () => {
     
     startTransition(async () => {
@@ -85,6 +78,13 @@ function OtpLogin() {
       }
     });
   };
+
+  useEffect(() => {
+    const hasEnteredAllDigits = otp.length === 6;
+    if (hasEnteredAllDigits) {
+      verifyOtp();
+    }
+  }, [otp, verifyOtp]);
 
   const requestOtp = async (e?: FormEvent<HTMLFormElement>) => {
     e?.preventDefault();

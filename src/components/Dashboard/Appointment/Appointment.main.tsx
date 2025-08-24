@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import AppointmentCard from './Appointment.card';
-import IReport from '../../../../Interfaces/reportInterface';
+import IReport from '../../../types/reportInterface';
 import getAllReports from '@/functions/report/getAllReports';
 
 const Appointment = () => {
